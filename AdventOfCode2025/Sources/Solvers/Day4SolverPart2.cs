@@ -27,7 +27,7 @@ public class Day4SolverPart2 : IBaseSolver
 	private int RemovedRolls(char[][] grid)
 	{
 		int removed = 0;
-		Queue<(int row, int col)> toRemove = new();
+		Queue<(int row, int col)> toRemove = new(grid.Length * grid[0].Length);
 
 		for (int row = 0; row < grid.Length; ++row)
 		{
