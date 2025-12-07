@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2025.Utils;
-using System.Numerics;
 
 namespace AdventOfCode2025.Solvers;
 
