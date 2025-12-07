@@ -13,7 +13,7 @@ public class Day7SolverPart1 : IBaseSolver
 	public string Solve(string input)
 	{
 		char[][] grid = BuildGrid(input);
-		int answer = EmulateAndCalSpilts(grid);
+		int answer = EmulateAndCalcSpilts(grid);
 
 		Log.Current.LogInformation($"Count of tachyon splits: {answer}");
 
@@ -45,7 +45,7 @@ public class Day7SolverPart1 : IBaseSolver
 			.ToArray();
 	}
 
-	private static int EmulateAndCalSpilts(char[][] grid)
+	private static int EmulateAndCalcSpilts(char[][] grid)
 	{
 		(int y, int x) start = FindStart(grid);
 		grid[start.y][start.x] = BEAM;
