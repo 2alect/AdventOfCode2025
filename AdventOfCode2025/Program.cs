@@ -1,5 +1,5 @@
 ﻿using AdventOfCode2025.Utils;
-using AdventOfCode2025.Solvers;
+using AdventOfCode2025.Solvers.Workflows;
 
 namespace AdventOfCode2025
 {
@@ -28,7 +28,7 @@ namespace AdventOfCode2025
 			CmdParser cmdParser = new();
 			ParsedArgs parsedArgs = cmdParser.ParseArgs(args);
 			SDebuggerUtils.Process(parsedArgs.DebugMode);
-			new SolverWorkflow().Execute(
+			new RegularSolveWorkflow().Execute(
 				parsedArgs.Day, 
 				parsedArgs.Level, 
 				parsedArgs.Mode, 

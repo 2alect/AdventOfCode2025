@@ -8,6 +8,7 @@ public class DataLoader
 	private static string AnswerDirName = "Answers";
 	private static string DayInputPattern = "day{0}.txt";
 	private static string DayAnswerPattern = "day{0}part{1}.txt";
+	private static string DayUniqueAnswerPattern = "day{0}solver{1}.txt";
 
 	private readonly WebInteractor _webInteractor;
 	private readonly string _workingDir;
@@ -34,11 +35,18 @@ public class DataLoader
 		return input;
 	}
 
-	public void UpdateAnswer(string solution, int day, Level level)
+	public void UpdateAnswer(string answer, int day, Level level)
 	{
 		string answerDir = EnsureDirectory(_workingDir, AnswerDirName);
 		string solutionPath = GetAnswerFilePath(answerDir, day, level);
-		SaveToFile(solutionPath, solution);
+		SaveToFile(solutionPath, answer);
+	}
+
+	public void UpdateUniqueAnswer(string answer, int day, string solverName)
+	{
+		string answerDir = EnsureDirectory(_workingDir, AnswerDirName);
+		string solutionPath = GetAnswerFilePath(answerDir, day, solverName);
+		SaveToFile(solutionPath, answer);
 	}
 
 	private static string EnsureDirectory(string path, string dirName)
@@ -66,6 +74,12 @@ public class DataLoader
 	private static string GetAnswerFilePath(string answerDir, int day, Level level)
 	{
 		string fileName = string.Format(DayAnswerPattern, day, (int)level);
+		return Path.Combine(answerDir, fileName);
+	}
+
+	private static string GetAnswerFilePath(string answerDir, int day, string solverName)
+	{
+		string fileName = string.Format(DayUniqueAnswerPattern, day, solverName);
 		return Path.Combine(answerDir, fileName);
 	}
 }
