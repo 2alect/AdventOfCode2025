@@ -21,6 +21,8 @@ public class Point3 : IEquatable<Point3>
 		return dx * dx + dy * dy + dz * dz;
 	}
 
+	public static double Distance(Point3 a, Point3 b) => Math.Sqrt(DistanceSq(a, b));
+
 	public bool Equals(Point3? other)
 	{
 		if (other is null) return false;
