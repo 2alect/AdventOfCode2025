@@ -8,7 +8,7 @@ public class Day9SolverPart1 : IBaseSolver
 {
 	public string Solve(string input)
 	{
-		Point2[] points = input.Split('\n')
+		Point2L[] points = input.Split('\n')
 			.Select(line => line.Trim())
 			.Where(line => line.Any())
 			.Select(Common.PointFromStr)
@@ -20,9 +20,9 @@ public class Day9SolverPart1 : IBaseSolver
 		{
 			for (int j = i + 1; j < points.Length; j++)
 			{
-				Point2 a = points[i];
-				Point2 b = points[j];
-				answer = Math.Max(answer, Point2.Area(a, b));
+				Point2L a = points[i];
+				Point2L b = points[j];
+				answer = Math.Max(answer, Point2L.Area(a, b));
 			}
 		}
 
@@ -30,6 +30,4 @@ public class Day9SolverPart1 : IBaseSolver
 
 		return answer.ToString();
 	}
-
-
 }

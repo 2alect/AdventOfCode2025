@@ -15,6 +15,11 @@ public class Day8SolverPart1 : IBaseSolver
 
 		DisjoinSet<Point3Id> dsu = new();
 
+		foreach (Point3Id point in points)
+		{
+			dsu.Add(point);
+		}
+
 		foreach (Point3IdPairWithDistance connection in nearestPoints.Take(1000))
 		{
 			dsu.Union(connection.First, connection.Second);

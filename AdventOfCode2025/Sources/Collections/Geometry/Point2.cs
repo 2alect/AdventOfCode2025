@@ -1,37 +1,37 @@
-﻿namespace AdventOfCode2025.Collections.Geometry;
+﻿using System.Numerics;
 
-public class Point2 : IEquatable<Point2>
+namespace AdventOfCode2025.Collections.Geometry;
+
+public class Point2<T> : PointND<T>
+	where T : INumber<T>
 {
-	public long X { get; private set; }
-	public long Y { get; private set; }
+	public T X { get; }
+	public T Y { get; }
 
-	public Point2(long x, long y)
+	public Point2(T x, T y)
 	{
 		X = x;
 		Y = y;
 	}
 
-	public static long DistanceSq(Point2 a, Point2 b)
-	{
-		long dx = a.X - b.X;
-		long dy = a.Y - b.Y;
-		return dx * dx + dy * dy;
-	}
+	public override int Dimensions => 2;
 
-	public static double Distance(Point2 a, Point2 b) => Math.Sqrt(DistanceSq(a, b));
-
-	public static long Area(Point2 a, Point2 b)
+	public override T this[int i] => i switch
 	{
-		long width = Math.Abs(a.X - b.X) + 1;
-		long height = Math.Abs(a.Y - b.Y) + 1;
+		0 => X,
+		1 => Y,
+		_ => throw new IndexOutOfRangeException($"Index {i} is out of range for 2D point")
+	};
+
+	public static T Area(Point2<T> a, Point2<T> b)
+	{
+		T width = T.Abs(a.X - b.X) + T.One;
+		T height = T.Abs(a.Y - b.Y) + T.One;
 		return width * height;
 	}
+}
 
-	public bool Equals(Point2? other)
-	{
-		if (other is null) return false;
-		return X == other.X && Y == other.Y;
-	}
-
-	public override int GetHashCode() => HashCode.Combine(X, Y);
+public sealed class Point2L : Point2<long>
+{
+	public Point2L(long x, long y) : base(x, y) { }
 }
