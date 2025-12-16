@@ -1,33 +1,33 @@
-﻿namespace AdventOfCode2025.Collections.Geometry;
+﻿using System.Numerics;
 
-public class Point3 : IEquatable<Point3>
+namespace AdventOfCode2025.Collections.Geometry;
+
+public class Point3<T> : PointND<T>
+	where T : INumber<T>
 {
-	public long X { get; private set; }
-	public long Y { get; private set; }
-	public long Z { get; private set; }
+	public T X { get; }
+	public T Y { get; }
+	public T Z { get; }
 
-	public Point3(long x, long y, long z)
+	public Point3(T x, T y, T z)
 	{
 		X = x;
 		Y = y;
 		Z = z;
 	}
 
-	public static long DistanceSq(Point3 a, Point3 b)
+	public override int Dimensions => 3;
+
+	public override T this[int i] => i switch
 	{
-		long dx = a.X - b.X;
-		long dy = a.Y - b.Y;
-		long dz = a.Z - b.Z;
-		return dx * dx + dy * dy + dz * dz;
-	}
+		0 => X,
+		1 => Y,
+		2 => Z,
+		_ => throw new IndexOutOfRangeException($"Index {i} is out of range for 3D point")
+	};
+}
 
-	public static double Distance(Point3 a, Point3 b) => Math.Sqrt(DistanceSq(a, b));
-
-	public bool Equals(Point3? other)
-	{
-		if (other is null) return false;
-		return X == other.X && Y == other.Y && Z == other.Z;
-	}
-
-	public override int GetHashCode() => HashCode.Combine(X, Y, Z);
+public sealed class Point3L : Point3<long>
+{
+	public Point3L(long x, long y, long z) : base(x, y, z) {}
 }
