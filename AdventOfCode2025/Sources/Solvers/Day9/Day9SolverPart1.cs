@@ -8,11 +8,7 @@ public class Day9SolverPart1 : IBaseSolver
 {
 	public string Solve(string input)
 	{
-		Point2L[] points = input.Split('\n')
-			.Select(line => line.Trim())
-			.Where(line => line.Any())
-			.Select(Common.PointFromStr)
-			.ToArray();
+		Point2L[] points = Common.ParsePoints(input);
 
 		long answer = 0;
 
