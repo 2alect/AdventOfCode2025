@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2025.Collections.Algorithms;
 
-internal class BinSearch
+internal static class BinSearch
 {
 	public static int LowBoundFirst<T>(T[] minSortedArr, T value)
 		where T : INumber<T>
